@@ -22,11 +22,15 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/todos.json', routes.get(todo));
+app.get('/todos.json', routes.getAll(todo));
+
+app.get('/todos/:id.json', routes.get(todo));
 
 app.put('/todo/:id.json', routes.update(todo));
 
 app.post('/todo.json', routes.addTodo(todo));
+
+app.delete('/todo/:id.json', routes.remove(todo));
 
 app.listen(3000,function(){
 	console.log('Yggdrasil listening on 3000...');
